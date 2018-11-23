@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using PoweredSoft.Data.Core;
 using System;
 using System.Collections.Generic;
@@ -28,11 +29,8 @@ namespace PoweredSoft.Data.EntityFrameworkCore
 
         public IQueryable GetQueryable(Type type)
         {
-            if (_setGenericMethod == null)
-                _setGenericMethod = typeof(DbContextFactory).GetMethods().FirstOrDefault(t => t.Name == nameof(GetQueryable) && t.ContainsGenericParameters);
-
-            var gm = _setGenericMethod.MakeGenericMethod(type);
-            var ret = (IQueryable)gm.Invoke(this, new object[] { });
+            var setSource = (IDbSetSource)this._context.GetType().GetProperty("SetSource", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(_context);
+            var ret = (IQueryable)((IDbSetCache)this).GetOrAddSet(setSource, type);
             return ret;
         }
 
@@ -43,6 +41,51 @@ namespace PoweredSoft.Data.EntityFrameworkCore
 
         public int SaveChanges() => _context.SaveChanges();
         public async Task<int> SaveChangesAsync() => await _context.SaveChangesAsync();
+
+        public IEnumerable<PropertyInfo> GetKeyProperties(Type entityType)
+        {
+            var key = _context.Model.FindEntityType(entityType).FindPrimaryKey();
+            var keysProperties = key.Properties.Select(t => t.PropertyInfo);
+            return keysProperties;
+        }
+
+        public IEnumerable<Expression<Func<TEntity, object>>> GetKeyProperties<TEntity>()
+        {
+            var keyProps = GetKeyProperties(typeof(TEntity));
+
+            var parameter = Expression.Parameter(typeof(TEntity));
+            var result = keyProps
+                .Select(keyProp =>
+                {
+                    var property = Expression.Property(parameter, keyProp);
+                    var funcType = typeof(Expression<Func<TEntity, object>>);
+                    var lambda = Expression.Lambda(funcType, Expression.Convert(property, typeof(Object)), parameter);
+                    return (Expression<Func<TEntity, object>>)lambda;
+                })
+                .ToList();
+            return result;
+        }
+
+        /*
+        // FOR EF6 when implemented.
+        public IEnumerable<MemberExpression> GetKeyProperties(Type entityType)
+        {
+            foreach (PropertyInfo prop in entityType.GetProperties())
+            {
+                object[] attrs = prop.GetCustomAttributes(false);
+
+                foreach (object obj in attrs)
+                {
+                    if (obj.GetType() == typeof(EdmScalarPropertyAttribute))
+                    {
+                        EdmScalarPropertyAttribute attr = (EdmScalarPropertyAttribute)obj;
+                        if (attr.EntityKeyProperty)
+                            keyList.Add(prop.Name);
+                    }
+                }
+
+            }
+        }*/
 
         public Task<T> FirstOrDefaultAsync<T>(IQueryable<T> queryable, CancellationToken cancellationToken = default(CancellationToken)) => queryable.FirstOrDefaultAsync(cancellationToken);
         public Task<T> FirstOrDefaultAsync<T>(IQueryable<T> queryable, Expression<Func<T, bool>> predicate, CancellationToken cancellationToken = default(CancellationToken)) => queryable.FirstOrDefaultAsync(predicate, cancellationToken);
