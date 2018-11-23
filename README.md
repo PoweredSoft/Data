@@ -12,3 +12,30 @@ Full Version                  | NuGet                                           
 ------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------:
 PoweredSoft.Data.Core      | <a href="https://www.nuget.org/packages/PoweredSoft.Data.Core/" target="_blank">[![NuGet](https://img.shields.io/nuget/v/PoweredSoft.Data.Core.svg?style=flat-square&label=nuget)](https://www.nuget.org/packages/PoweredSoft.Data.Core/)</a>                |      ```PM> Install-Package PoweredSoft.Data.Core```
 PoweredSoft.Data.EntityFrameworkCore | <a href="https://www.nuget.org/packages/PoweredSoft.Data.EntityFrameworkCore/" target="_blank">[![NuGet](https://img.shields.io/nuget/v/PoweredSoft.Data.EntityFrameworkCore.svg?style=flat-square&label=nuget)](https://www.nuget.org/packages/PoweredSoft.Data.EntityFrameworkCore/)</a> | ```PM> Install-Package PoweredSoft.Data.EntityFrameworkCore```
+
+
+# In your application you may do the following
+
+```csharp
+public class Startup
+{
+    public void ConfigureServices(IServiceCollection services) 
+    {
+        services.AddPoweredSoftDataServices();
+    }
+}
+```
+
+> Then somewhere else.
+
+```csharp
+public class SomeClass
+{
+    private readonly IDbContextFactory contextFactory;
+    public SomeClass(IDbContextFactoryProvider dbContextFactoryProvider)
+    {
+        contextFactory = dbContextFactoryProvider.GetContextFactory(typeof(YourFavoriteContext));
+    }
+}
+
+```
