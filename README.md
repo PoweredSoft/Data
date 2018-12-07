@@ -39,3 +39,18 @@ public class SomeClass
 }
 
 ```
+
+## AsyncQueryableFactory
+
+Also as the same kind of goal, will slowly add support for a non dependant to orm async method.
+
+```csharp
+public interface IAsyncQueryableFactory
+{
+    Task<T> FirstOrDefaultAsync<T>(IQueryable<T> queryable, CancellationToken cancellationToken = default(CancellationToken));
+    Task<T> FirstOrDefaultAsync<T>(IQueryable<T> queryable, Expression<Func<T, bool>> predicate, CancellationToken cancellationToken = default(CancellationToken));
+    Task<List<T>> ToListAsync<T>(IQueryable<T> queryable, CancellationToken cancellationToken = default(CancellationToken));
+    Task<int> CountAsync<T>(IQueryable<T> queryable, CancellationToken cancellationToken = default(CancellationToken));
+    Task<long> LongCountAsync<T>(IQueryable<T> queryable, CancellationToken cancellationToken = default(CancellationToken));
+}
+```

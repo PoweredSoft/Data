@@ -9,7 +9,7 @@
     <RepositoryUrl>https://github.com/PoweredSoft/Data</RepositoryUrl>
     <RepositoryType>github</RepositoryType>
     <PackageTags>powered,soft,orm,db,context,ef,ef6,efcore,factory</PackageTags>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <PackageIconUrl>https://secure.gravatar.com/avatar/4e32f73820c16718909a06c2927f1f8b?s=512&amp;amp;r=g&amp;amp;d=retro</PackageIconUrl>
     <Product>PoweredSoft.Data.Core</Product>
     <Description>Library to abstract orm.</Description>
@@ -18,6 +18,8 @@
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <Company>PoweredSoft.Data.Core</Company>
     <Authors>PoweredSoft.Data.Core</Authors>
+    <AssemblyVersion>1.0.2.0</AssemblyVersion>
+    <FileVersion>1.0.2.0</FileVersion>
   </PropertyGroup>
 
 </Project>
