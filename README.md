@@ -2,7 +2,7 @@
 
 The goal of this project is to help, fill the gap of supporting multiple ORM's in DynamicQuery, and possibly more projects in the future.
 
-One of the most obvious reasy is to be able to execute async/await operations on the context without, the executing library to be dependant on the ORM Framework such as (EF Core, EF6).
+One of the most obvious reason is to be able to execute async/await operations on the context without, the executing library to be dependant on the ORM Framework such as (EF Core, EF6).
 
 ## Getting Started
 
