@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using PoweredSoft.Data.Core;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,8 @@ namespace PoweredSoft.Data.EntityFrameworkCore
     {
         public static IServiceCollection AddPoweredSoftDataServices(this IServiceCollection services)
         {
-            services.AddTransient<IDbContextFactoryProvider, DbContextFactoryProvider>();
+            services.TryAddTransient<IDbContextFactoryProvider, DbContextFactoryProvider>();
+            services.TryAddTransient<IAsyncQueryableFactory, AsyncQueryableFactory>();
             return services;
         }
     }

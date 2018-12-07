@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace PoweredSoft.Data.EntityFrameworkCore
@@ -65,30 +64,5 @@ namespace PoweredSoft.Data.EntityFrameworkCore
                 .ToList();
             return result;
         }
-
-        /*
-        // FOR EF6 when implemented.
-        public IEnumerable<MemberExpression> GetKeyProperties(Type entityType)
-        {
-            foreach (PropertyInfo prop in entityType.GetProperties())
-            {
-                object[] attrs = prop.GetCustomAttributes(false);
-
-                foreach (object obj in attrs)
-                {
-                    if (obj.GetType() == typeof(EdmScalarPropertyAttribute))
-                    {
-                        EdmScalarPropertyAttribute attr = (EdmScalarPropertyAttribute)obj;
-                        if (attr.EntityKeyProperty)
-                            keyList.Add(prop.Name);
-                    }
-                }
-
-            }
-        }*/
-
-        public Task<T> FirstOrDefaultAsync<T>(IQueryable<T> queryable, CancellationToken cancellationToken = default(CancellationToken)) => queryable.FirstOrDefaultAsync(cancellationToken);
-        public Task<T> FirstOrDefaultAsync<T>(IQueryable<T> queryable, Expression<Func<T, bool>> predicate, CancellationToken cancellationToken = default(CancellationToken)) => queryable.FirstOrDefaultAsync(predicate, cancellationToken);
-        public Task<List<T>> ToListAsync<T>(IQueryable<T> queryable, CancellationToken cancellationToken = default(CancellationToken)) => queryable.ToListAsync(cancellationToken);
     }
 }

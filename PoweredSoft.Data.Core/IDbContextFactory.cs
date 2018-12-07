@@ -4,7 +4,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace PoweredSoft.Data.Core
@@ -21,9 +20,5 @@ namespace PoweredSoft.Data.Core
         Task<int> SaveChangesAsync();
         IEnumerable<PropertyInfo> GetKeyProperties(Type entityType);
         IEnumerable<Expression<Func<TEntity, object>>> GetKeyProperties<TEntity>();
-    
-        Task<T> FirstOrDefaultAsync<T>(IQueryable<T> queryable, CancellationToken cancellationToken);
-        Task<T> FirstOrDefaultAsync<T>(IQueryable<T> queryable, Expression<Func<T, bool>> predicate, CancellationToken cancellationToken);
-        Task<List<T>> ToListAsync<T>(IQueryable<T> queryable, CancellationToken cancellationToken);
     }
 }
