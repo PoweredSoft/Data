@@ -13,7 +13,7 @@ namespace PoweredSoft.Data.EntityFrameworkCore
         {
             services.AddPoweredSoftDataServices();
             services.TryAddTransient<IDbContextFactoryProvider, DbContextFactoryProvider>();
-            services.TryAddTransient<IAsyncQueryableHandlerService, AsyncQueryableHandlerService>();
+            services.AddTransient<IAsyncQueryableHandlerService, AsyncQueryableHandlerService>();
             return services;
         }
     }

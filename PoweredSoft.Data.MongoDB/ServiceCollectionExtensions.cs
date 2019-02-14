@@ -12,7 +12,7 @@ namespace PoweredSoft.Data.MongoDB
         public static IServiceCollection AddPoweredSoftMongoDBDataServices(this IServiceCollection services)
         {
             services.AddPoweredSoftDataServices();
-            services.TryAddTransient<IAsyncQueryableHandlerService, AsyncQueryableHandlerService>();
+            services.AddTransient<IAsyncQueryableHandlerService, AsyncQueryableHandlerService>();
             return services;
         }
     }
