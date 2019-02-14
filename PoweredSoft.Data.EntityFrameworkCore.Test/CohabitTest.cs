@@ -8,6 +8,8 @@ using PoweredSoft.Test.Mock;
 using PoweredSoft.Data.Core;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using PoweredSoft.Data.MongoDB;
 
 namespace PoweredSoft.Data.EntityFrameworkCore.Test
 {
@@ -34,6 +36,23 @@ namespace PoweredSoft.Data.EntityFrameworkCore.Test
 
             var shouldBeEfCoreHandler = service.GetAsyncQueryableHandler(efCoreOrders);
             Assert.Equal(efCoreHandler, shouldBeEfCoreHandler);
+        }
+
+
+        [Fact]
+        public void TestDI()
+        {
+            var services = new ServiceCollection();
+            services.AddPoweredSoftEntityFrameworkCoreDataServices();
+            services.AddPoweredSoftMongoDBDataServices();
+
+            var sp = services.BuildServiceProvider();
+
+            var result = sp.GetServices<IAsyncQueryableHandlerService>();
+            var someService = sp.GetService<IAsyncQueryableService>();
+
+            Assert.Equal(2, result.Count());
+            Assert.Equal(2, someService.Handlers.Count());
         }
     }
 }

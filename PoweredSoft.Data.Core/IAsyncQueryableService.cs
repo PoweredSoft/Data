@@ -9,6 +9,8 @@ namespace PoweredSoft.Data.Core
 {
     public interface IAsyncQueryableService
     {
+        IEnumerable<IAsyncQueryableHandlerService> Handlers { get;  }
+
         IAsyncQueryableHandlerService GetAsyncQueryableHandler<T>(IQueryable<T> queryable);
 
         Task<T> FirstOrDefaultAsync<T>(IQueryable<T> queryable, CancellationToken cancellationToken = default(CancellationToken));

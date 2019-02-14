@@ -10,12 +10,12 @@ namespace PoweredSoft.Data
 {
     public class AsyncQueryableService : IAsyncQueryableService
     {
-        public AsyncQueryableService(IEnumerable<IAsyncQueryableHandlerService> asyncQueryableFactories)
-        {
-            AsyncQueryableFactories = asyncQueryableFactories;
-        }
+        public IEnumerable<IAsyncQueryableHandlerService> Handlers { get; }
 
-        public IEnumerable<IAsyncQueryableHandlerService> AsyncQueryableFactories { get; }
+        public AsyncQueryableService(IEnumerable<IAsyncQueryableHandlerService> handlers)
+        {
+            Handlers = handlers;
+        }
 
         public Task<int> CountAsync<T>(IQueryable<T> queryable, CancellationToken cancellationToken = default(CancellationToken))
             => GetAsyncQueryableHandlerOrThrow(queryable).CountAsync(queryable, cancellationToken);
@@ -37,7 +37,7 @@ namespace PoweredSoft.Data
 
         public IAsyncQueryableHandlerService GetAsyncQueryableHandler<T>(IQueryable<T> queryable)
         {
-            var handler = AsyncQueryableFactories.FirstOrDefault(t => t.CanHandle(queryable));
+            var handler = Handlers.FirstOrDefault(t => t.CanHandle(queryable));
             return handler;
         }
 
