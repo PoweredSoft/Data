@@ -5,14 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace PoweredSoft.Data.EntityFrameworkCore
+namespace PoweredSoft.Data.MongoDB
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddPoweredSoftEntityFrameworkCoreDataServices(this IServiceCollection services)
+        public static IServiceCollection AddPoweredSoftMongoDBDataServices(this IServiceCollection services)
         {
             services.AddPoweredSoftDataServices();
-            services.TryAddTransient<IDbContextFactoryProvider, DbContextFactoryProvider>();
             services.TryAddTransient<IAsyncQueryableHandlerService, AsyncQueryableHandlerService>();
             return services;
         }

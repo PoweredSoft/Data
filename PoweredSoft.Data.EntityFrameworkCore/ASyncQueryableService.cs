@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 using PoweredSoft.Data.Core;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PoweredSoft.Data.EntityFrameworkCore
 {
-    public class AsyncQueryableFactory : IAsyncQueryableFactory
+    public class AsyncQueryableHandlerService : IAsyncQueryableHandlerService
     {
         public Task<T> FirstOrDefaultAsync<T>(IQueryable<T> queryable, CancellationToken cancellationToken = default(CancellationToken))
             => queryable.FirstOrDefaultAsync(cancellationToken);
@@ -21,5 +22,13 @@ namespace PoweredSoft.Data.EntityFrameworkCore
             => queryable.CountAsync();
         public Task<long> LongCountAsync<T>(IQueryable<T> queryable, CancellationToken cancellationToken = default(CancellationToken))
             => queryable.LongCountAsync();
+
+        public bool CanHandle<T>(IQueryable<T> queryable) => queryable.Provider is IAsyncQueryProvider;
+
+        public Task<bool> AnyAsync<T>(IQueryable<T> queryable, Expression<Func<T, bool>> predicate, CancellationToken cancellationToken = default(CancellationToken))
+            => queryable.AnyAsync(predicate, cancellationToken);
+
+        public Task<bool> AnyAsync<T>(IQueryable<T> queryable, CancellationToken cancellationToken = default(CancellationToken))
+            => queryable.AnyAsync(cancellationToken);
     }
 }

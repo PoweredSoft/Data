@@ -13,7 +13,6 @@ namespace PoweredSoft.Data.EntityFrameworkCore
     public class DbContextFactory : IDbContextFactory
     {
         private readonly DbContext _context;
-        private MethodInfo _setGenericMethod = null;
 
         public DbContextFactory(DbContext dbContext)
         {
