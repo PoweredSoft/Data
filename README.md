@@ -32,23 +32,9 @@ public class Startup
 }
 ```
 
-> Then somewhere else.
-
-```csharp
-public class SomeClass
-{
-    private readonly IDbContextFactory contextFactory;
-    public SomeClass(IDbContextFactoryProvider dbContextFactoryProvider)
-    {
-        contextFactory = dbContextFactoryProvider.GetContextFactory(typeof(YourFavoriteContext));
-    }
-}
-
-```
-
 ## AsyncQueryableFactory
 
-Also as the same kind of goal, will slowly add support for a non dependant to orm async method.
+Also as the same kind of goal, will slowly add support for a non dependant to orm/drivers async method.
 
 ```csharp
 public interface IAsyncQueryableHandlerService
@@ -70,7 +56,7 @@ How to use
 public class SomeClass
 {
     private readonly IAsyncQueryableService asyncQueryableService;
-    public SomeClass(IDbContextFactoryProvider asyncQueryableService)
+    public SomeClass(IAsyncQueryableService asyncQueryableService)
     {
         this.asyncQueryableService = asyncQueryableService;
     }
