@@ -12,7 +12,6 @@ namespace PoweredSoft.Data.EntityFrameworkCore
         public static IServiceCollection AddPoweredSoftEntityFrameworkCoreDataServices(this IServiceCollection services)
         {
             services.AddPoweredSoftDataServices();
-            services.TryAddTransient<IDbContextFactoryProvider, DbContextFactoryProvider>();
             services.AddTransient<IAsyncQueryableHandlerService, AsyncQueryableHandlerService>();
             return services;
         }
