@@ -2,6 +2,21 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.1;net461</TargetFrameworks>
+    <Copyright>Powered Softwares Inc.</Copyright>
+    <PackageLicenseUrl>MIT</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/PoweredSoft/Data</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/PoweredSoft/Data</RepositoryUrl>
+    <RepositoryType>github</RepositoryType>
+    <PackageTags>powered,soft,orm,db,context,ef,ef6,efcore,factory</PackageTags>
+    <Version>2.0.0</Version>
+    <PackageIconUrl>https://secure.gravatar.com/avatar/4e32f73820c16718909a06c2927f1f8b?s=512&amp;amp;r=g&amp;amp;d=retro</PackageIconUrl>
+    <Product>PoweredSoft.Data.EntityFramework</Product>
+    <Description>the abstraction implementation for EF Core.</Description>
+    <PackageId>PoweredSoft.Data.EntityFramework</PackageId>
+    <PackageReleaseNotes>N/A</PackageReleaseNotes>
+    <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+    <Company>PoweredSoft</Company>
+    <Authors>David Lebee</Authors>
   </PropertyGroup>
 
   <ItemGroup>
