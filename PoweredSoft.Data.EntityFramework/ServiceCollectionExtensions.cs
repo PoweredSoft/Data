@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace PoweredSoft.Data.EntityFrameworkCore
+namespace PoweredSoft.Data.EntityFramework
 {
     public static class ServiceCollectionExtensions
     {
