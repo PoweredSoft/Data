@@ -14,6 +14,7 @@ PoweredSoft.Data      | <a href="https://www.nuget.org/packages/PoweredSoft.Data
 PoweredSoft.Data.EntityFramework | <a href="https://www.nuget.org/packages/PoweredSoft.Data.EntityFramework/" target="_blank">[![NuGet](https://img.shields.io/nuget/v/PoweredSoft.Data.EntityFramework.svg?style=flat-square&label=nuget)](https://www.nuget.org/packages/PoweredSoft.Data.EntityFramework/)</a> | ```PM> Install-Package PoweredSoft.Data.EntityFramework```
 PoweredSoft.Data.EntityFrameworkCore | <a href="https://www.nuget.org/packages/PoweredSoft.Data.EntityFrameworkCore/" target="_blank">[![NuGet](https://img.shields.io/nuget/v/PoweredSoft.Data.EntityFrameworkCore.svg?style=flat-square&label=nuget)](https://www.nuget.org/packages/PoweredSoft.Data.EntityFrameworkCore/)</a> | ```PM> Install-Package PoweredSoft.Data.EntityFrameworkCore```
 PoweredSoft.Data.MongoDB | <a href="https://www.nuget.org/packages/PoweredSoft.Data.MongoDB/" target="_blank">[![NuGet](https://img.shields.io/nuget/v/PoweredSoft.Data.MongoDB.svg?style=flat-square&label=nuget)](https://www.nuget.org/packages/PoweredSoft.Data.MongoDB/)</a> | ```PM> Install-Package PoweredSoft.Data.MongoDB```
+PoweredSoft.Data.InMemory | <a href="https://www.nuget.org/packages/PoweredSoft.Data.InMemory/" target="_blank">[![NuGet](https://img.shields.io/nuget/v/PoweredSoft.Data.InMemory.svg?style=flat-square&label=nuget)](https://www.nuget.org/packages/PoweredSoft.Data.InMemory/)</a> | ```PM> Install-Package PoweredSoft.Data.InMemory```
 
 
 # In your application you may do the following
@@ -28,6 +29,9 @@ public class Startup
 
         // for ef core
         services.AddPoweredSoftEntityFrameworkCoreDataServices();
+        
+        // for in memory 
+        services.AddPoweredSoftInMemoryDataServices();
     }
 }
 ```
